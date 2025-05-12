@@ -1,0 +1,18 @@
+---
+import PostLayout from '@/layouts/post.layout.astro';
+import { getSortedCollection } from '@/utils/collection';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post }
+  }));
+}
+const { post } = Astro.props;
+
+const posts = await getCollection('blog');
+const sortedPosts = getSortedCollection(posts);
+---
+
+<PostLayout post={post} posts={sortedPosts} />

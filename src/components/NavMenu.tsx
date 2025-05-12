@@ -1,4 +1,3 @@
-import menu2 from '@iconify/icons-tabler/menu-2';
 import { Icon } from '@iconify/react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -7,8 +6,8 @@ interface Props {
 }
 const menu = [
   {
-    title: 'Blogs',
-    url: '/blogs'
+    title: 'Posts',
+    url: '/posts'
   },
   {
     title: 'Tags',
@@ -45,15 +44,15 @@ const NavMenu: React.FC<Props> = ({ pathname }) => {
       <button
         title="menu"
         aria-label="Menu"
-        className={`cursor-pointer hover:scale-110 hover:text-primary max-md:absolute max-md:right-20 max-md:block md:hidden dark:text-slate-300`}
+        className={`hover:text-primary cursor-pointer hover:scale-110 max-md:absolute max-md:right-20 max-md:block md:hidden dark:text-slate-300`}
         onClick={openMenu}
       >
-        <Icon icon={menu2} fontSize={20} />
+        <Icon icon="tabler:menu-2" fontSize={20} />
       </button>
       <div
         ref={maskRef}
         className={`absolute left-0 right-0 top-0 z-[990] mt-[64px] h-full w-full opacity-40 transition-all duration-300 ease-in-out max-md:bg-black ${
-          show ? 'block animate-in fade-in' : 'hidden animate-out fade-out'
+          show ? 'animate-in fade-in block' : 'animate-out fade-out hidden'
         }`}
       ></div>
       <nav
@@ -66,9 +65,9 @@ const NavMenu: React.FC<Props> = ({ pathname }) => {
           <a
             key={item.url}
             href={item.url}
-            className={`hover:text-primary max-md:flex max-md:justify-center max-md:p-4 max-md:hover:bg-slate-300 max-md:focus:bg-slate-300 ${
+            className={`hover:text-foreground max-md:flex max-md:justify-center max-md:p-4 max-md:hover:bg-slate-300 max-md:focus:bg-slate-300 ${
               pathname.includes(item.url)
-                ? 'underline decoration-primary decoration-wavy underline-offset-4 max-md:bg-slate-300 max-md:decoration-transparent'
+                ? 'decoration-primary underline decoration-wavy underline-offset-4 max-md:bg-slate-300 max-md:decoration-transparent'
                 : ''
             }`}
             onClick={handleClick}

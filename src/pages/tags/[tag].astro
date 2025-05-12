@@ -1,31 +1,28 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import MainLayout from '@/layouts/main.layout.astro';
-import type { CollectionsKeys } from '@/content/config';
-import Icon from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 import Link from '@/components/Link.astro';
 import dayjs from 'dayjs';
 interface Props {
-  entries: CollectionEntry<CollectionsKeys>[];
+  entries: CollectionEntry<'blog'>[];
 }
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blogs');
+  const posts = await getCollection('blog');
   const allUniqueTags = [
-    ...new Set(blogEntries.map((entry) => entry.data.tags).flat())
+    ...new Set(posts.map((entry) => entry.data.tags).flat())
   ];
 
   return allUniqueTags.map((tag) => {
-    const filterdEntries = blogEntries.filter((entry) =>
-      entry.data.tags.includes(tag)
-    );
+    const filterdPosts = posts.filter((entry) => entry.data.tags.includes(tag));
     return {
       params: { tag },
-      props: { entries: filterdEntries }
+      props: { posts: filterdPosts }
     };
   });
 }
 const { tag } = Astro.params;
-const { entries } = Astro.props;
+const { posts } = Astro.props;
 ---
 
 <MainLayout>
@@ -43,15 +40,15 @@ const { entries } = Astro.props;
           size="18"
           class="group-hover:scale-125"
         />
-         Back
+        Back
       </button>
     </div>
     <p class="text-base opacity-50">All the articles with the tag "{tag}".</p>
     <ul class="space-y-4 py-4 text-lg">
       {
-        entries.map(({ data, slug, collection }) => (
+        posts.map(({ data, id }) => (
           <li class="flex items-center gap-4 group border-b py-2 hover:shadow-lg cursor-pointer">
-            <Link href={`/${collection}/${slug}`}>{data.title}</Link>
+            <Link href={`/posts/${id}`}>{data.title}</Link>
             <span class="opacity-70">
               {dayjs(data.pubDateTime).format('YYYY-MM-DD')}
             </span>

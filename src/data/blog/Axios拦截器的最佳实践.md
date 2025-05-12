@@ -6,8 +6,6 @@ tags: ['Axios', 'Design Pattern']
 description: 通过发布订阅模式替代传统的Axios拦截器逻辑处理，实现模块的功能解耦和可维护性提升
 ---
 
-# 使用发布订阅模式解耦Axios处理逻辑
-
 通常情况下，我们会在Axios的拦截器中针对请求或者响应做一些额外的处理，例如路由跳转、token失效处理、弹出悬浮窗等等，如果将这些处理逻辑都集中在一个拦截器中，那么当业务逻辑变更时，我们需要修改整个拦截器的代码，这将导致代码的可维护性降低。
 
 下面我们以`request.ts`中登录模块的路由跳转、弹出悬浮窗为例，来看看如何使用发布订阅模式解耦Axios处理逻辑：
@@ -75,20 +73,20 @@ class EventEmitter {
 }
 export default new EventEmitter();
 ```
+
 注册事件：
 
 ```ts
 import eventEmitter from './eventEmitter';
 
-eventEmitter.on("LOGIN_REQUIRED",() => {
-    window.location.href = '/login';
-})
+eventEmitter.on('LOGIN_REQUIRED', () => {
+  window.location.href = '/login';
+});
 
-eventEmitter.on("UN_AUTHORIZED",() => {
-    message.error('Token expired, please login again');
-    window.location.href = '/login';
-})
-
+eventEmitter.on('UN_AUTHORIZED', () => {
+  message.error('Token expired, please login again');
+  window.location.href = '/login';
+});
 ```
 
 改造后的`request.ts`的代码：
@@ -111,7 +109,7 @@ function requestInterceptor(config) {
 function responseInterceptor(response) {
   // 弹出悬浮窗
   if (response.data.code === 401) {
-    eventEmitter.emit("UN_AUTHORIZED");
+    eventEmitter.emit('UN_AUTHORIZED');
   }
   return response;
 }
@@ -126,4 +124,3 @@ axiosInstance.interceptors.response.use(responseInterceptor);
 2. 事件中心可以统一管理事件，使得订阅者和发布者之间的耦合度降低。
 
 3. 订阅者只需要关注自己的功能实现，从而达到解耦的效果。
-

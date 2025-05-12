@@ -1,85 +1,85 @@
 ---
-import type { PostFrontmatter } from '@/content/_schema';
-import type { CollectionsKeys } from '@/content/config';
-import { Icon } from 'astro-icon';
-import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import MainLayout from './main.layout.astro';
 dayjs.extend(relativeTime);
 interface Props {
-  frontmatter: PostFrontmatter;
-  collection: CollectionsKeys;
+  post: CollectionEntry<'blog'>;
+  posts: CollectionEntry<'blog'>[];
   slug?: string;
 }
-const { frontmatter, collection, slug } = Astro.props;
-const content = await getCollection(collection);
-const currentIndex = content.findIndex((item) => item.slug === slug);
-const previous = content[currentIndex - 1]?.slug;
-const next = content[currentIndex + 1]?.slug;
+const { post, posts } = Astro.props;
+const { title, pubDateTime, minutesRead, tags } = post.data;
+const { Content } = await render(post);
+const currentIndex = posts.findIndex((item) => item.id === post.id);
+const previous = currentIndex !== 0 ? posts[currentIndex - 1].id : null;
+const next =
+  currentIndex !== posts.length - 1 ? posts[currentIndex + 1].id : null;
 ---
 
 <MainLayout>
   <div class="py-4 space-y-4 w-full">
     <div class="space-y-4">
-      <div class="text-3xl font-semibold dark:text-primary italic">
-        {frontmatter.title}
+      <div class="text-3xl font-semibold text-accent">
+        {title}
       </div>
-      <div class="flex gap-8 items-center text-slate-500">
-        <span 
-          >
-          {dayjs(frontmatter.pubDateTime).format('YYYY-MM-DD')}</span
-        >
-        <div class="flex items-center gap-2"
-          ><Icon name="tabler:clock" size="20" /> {
-            frontmatter?.minutesRead
-          }</div
-        >
+      <div class="flex gap-2 items-center">
+        <Icon name="tabler:calendar" size="20"/>
+        <span> {dayjs(pubDateTime).format('YYYY-MM-DD')}</span>
       </div>
     </div>
-    <article class="prose lg:prose-xl prose-slate max-w-none dark:prose-invert">
-      <slot />
+    <article class="prose max-w-none mx-auto">
+      <Content />
     </article>
     <div class="flex gap-4">
       {
-        frontmatter.tags.map((tag) => (
+        tags.map((tag) => (
           <span class="flex items-center gap-2 rounded py-1 px-2 underline underline-offset-4 text-sm hover:shadow-lg cursor-pointer">
-            #
-            {tag}
+            #{tag}
           </span>
         ))
       }
     </div>
-    <div class="grid grid-cols-2 gap-4 font-semibold">
+    <div class="grid sm:grid-cols-2 grid-cols-1 gap-4 font-semibold">
       {
-        previous &&  <a
-        href={`/${collection}/${previous}`}
-        class={`flex-1 rounded p-2 border-2 shadow-sm dark:border-slate-500 hover:text-primary hover:border-primary cursor-pointer ${
-          !previous && 'pointer-events-none cursor-none'
-        }`}
-      >
-        <div class="flex items-center gap-4">
-          <Icon name="tabler:chevron-left" size="20" />
-           <span>Prev</span>
-        </div>
-        <div class="text-ellipsis overflow-hidden whitespace-nowrap">{previous}</div> 
-      </a>
+        previous && (
+          <a
+            href={`/posts/${previous}`}
+            class={`col-span-1 rounded p-2 border-2 shadow-sm dark:border-slate-500 hover:text-primary hover:border-primary cursor-pointer ${
+              !previous && 'pointer-events-none cursor-none'
+            }`}
+          >
+            <div class="flex items-center gap-4">
+              <Icon name="tabler:chevron-left" size="20" />
+              <span>Prev</span>
+            </div>
+            <div class="text-ellipsis overflow-hidden whitespace-nowrap">
+              {previous}
+            </div>
+          </a>
+        )
       }
       {
-        next &&  <a
-        href={`/${collection}/${next}`}
-        class={`flex-1 p-2 rounded border-2 shadow-sm dark:border-slate-500 hover:text-primary hover:border-primary cursor-pointer ${
-          !next && 'pointer-events-none cursor-none'
-        }`}
-      >
-      <div class="flex justify-end items-center gap-4">
-        <span>Next</span>
-        <Icon name="tabler:chevron-right" size="20" />
-      </div>
-      <div class="text-ellipsis overflow-hidden whitespace-nowrap text-end">{next}</div>
-      </a>
+        next && (
+          <a
+            href={`/posts/${next}`}
+            class={`sm:col-start-2 p-2 rounded border-2 shadow-sm dark:border-slate-500 hover:text-primary hover:border-primary cursor-pointer ${
+              !next && 'pointer-events-none cursor-none'
+            }`}
+          >
+            <div class="flex justify-end items-center gap-4">
+              <span>Next</span>
+              <Icon name="tabler:chevron-right" size="20" />
+            </div>
+            <div class="text-ellipsis overflow-hidden whitespace-nowrap text-end">
+              {next}
+            </div>
+          </a>
+        )
       }
-     
     </div>
   </div>
 </MainLayout>

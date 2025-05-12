@@ -1,4 +1,3 @@
-import type { CollectionsKeys } from '@/content/config.ts';
 import type { CollectionEntry } from 'astro:content';
 /**
  * Get latest item of collection
@@ -7,7 +6,7 @@ import type { CollectionEntry } from 'astro:content';
  * @returns
  */
 export function getLatestItem(
-  collection: CollectionEntry<CollectionsKeys>[],
+  collection: CollectionEntry<'blog'>[],
   num: number
 ) {
   if (num > collection.length) return collection;
@@ -22,8 +21,8 @@ export function getLatestItem(
  * @param order
  * @returns
  */
-export function getOrderCollection(
-  collection: CollectionEntry<CollectionsKeys>[],
+export function getSortedCollection(
+  collection: CollectionEntry<'blog'>[],
   order: 'asc' | 'desc' = 'desc'
 ) {
   const sortedCollection = [...collection].sort((a, b) => {

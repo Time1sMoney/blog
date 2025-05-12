@@ -1,14 +1,14 @@
 ---
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import '@/main.css';
-import '@fontsource/monaspace-neon';
-import { ViewTransitions } from 'astro:transitions';
 import BackToTop from '@/components/BackToTop';
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import '@/styles/global.css';
+import '@fontsource/monaspace-neon';
+import { ClientRouter } from 'astro:transitions';
 interface Props {
   pageTitle?: string;
 }
-const { pageTitle = "Codercoin's Blog" } = Astro.props;
+const { pageTitle = "Time1sMoney's Blog" } = Astro.props;
 ---
 
 <html lang="en">
@@ -16,39 +16,13 @@ const { pageTitle = "Codercoin's Blog" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Codercoin's blog">
+    <meta name="description" content="Time1sMoney's blog" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{pageTitle}</title>
-    <ViewTransitions fallback="animate" />
-    <script is:inline>
-      const setTheme = () => {
-        const theme = (() => {
-          if (
-            typeof localStorage !== 'undefined' &&
-            localStorage.getItem('theme')
-          ) {
-            return localStorage.getItem('theme');
-          }
-          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-          }
-          return 'light';
-        })();
-        if (theme === 'light') {
-          document.documentElement.classList.remove('dark');
-        } else {
-          document.documentElement.classList.add('dark');
-        }
-        window.localStorage.setItem('theme', theme);
-      };
-      // Run on initial navigation
-      setTheme();
-      // Runs on view transitions navigation
-      document.addEventListener('astro:after-swap', setTheme);
-    </script>
+    <ClientRouter fallback="animate" />
   </head>
   <body
-    class="relative bg-slate-100 dark:text-slate-300 dark:bg-slate-950 font-sans min-w-[500px] min-h-[100vh] flex flex-col"
+    class="relative font-sans min-w-[500px] min-h-[100vh] flex flex-col"
   >
     <Header />
     <main
@@ -57,7 +31,7 @@ const { pageTitle = "Codercoin's Blog" } = Astro.props;
     >
       <slot />
     </main>
-    <Footer/>
+    <Footer />
     <BackToTop client:only="react" />
   </body>
 </html>
