@@ -15,17 +15,16 @@ export default defineConfig({
     remarkPlugins: [remarkToc],
     rehypePlugins: [rehypeAccessibleEmojis],
     syntaxHighlight: 'shiki',
-    gfm: true
+    gfm: true,
+    shikiConfig: {
+      themes: { light: 'one-light', dark: 'catppuccin-mocha' },
+      wrap: true
+    }
   },
   // Enable React to support React JSX components.
   integrations: [
     react(),
-    mdx({
-      shikiConfig: {
-        themes: { light: 'min-light', dark: 'min-dark' },
-        wrap: true
-      }
-    }),
+    mdx(),
     astroIcon({
       include: {
         tabler: ['*'],
@@ -36,7 +35,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwind()]
   },
-
   experimental: {
     responsiveImages: true
   }
