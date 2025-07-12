@@ -23,7 +23,7 @@ const BackToTop = () => {
     <button
       id="back-to-top"
       aria-label="Back to Top"
-      className={`hover:border-accent hover:text-accent fixed bottom-10 right-40 rounded-full border-2 border-dashed bg-background p-2 max-md:hidden ${
+      className={`hover:border-primary hover:text-primary fixed bottom-10 right-40 rounded-full border-2 border-dashed bg-background p-2 max-md:hidden ${
         isShow ? 'visible' : 'invisible'
       }`}
       onClick={handleClick}

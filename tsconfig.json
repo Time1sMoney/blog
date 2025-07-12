@@ -5,6 +5,8 @@
     "jsxImportSource": "react",
     "allowJs": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [

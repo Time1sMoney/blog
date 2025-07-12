@@ -2,33 +2,39 @@
 import MainLayout from '@/layouts/main.layout.astro';
 import { getLatestItem } from '@/utils/collection';
 import { getCollection } from 'astro:content';
-import dayjs from 'dayjs';
+import dayjs from '@/utils/dayjs';
 const post = await getCollection('blog');
 const latestPosts = getLatestItem(post, 5);
 ---
 
 <MainLayout>
   <div class="container mx-auto flex-1 py-4">
-    <ul class="flex flex-col h-full space-y-4">
+    <div class="flex flex-col gap-5 text-xl font-bold px-4">
+      <p>Hey,I'm Alonia.</p>
+      <p>A full-stack web developer and independent game producer.</p>
+      <p>
+        This blog is updated from time to time.You can found some articles you
+        are interested in.Have a happy reading time.
+      </p>
+    </div>
+    <div class="h-0 border border-border my-4 mx-2"></div>
+    <ul class="flex flex-col gap-2">
       {
         latestPosts.map(({ data, id }) => (
-          <li class="space-y-2 px-4 py-2 group rounded border-b cursor-pointer">
+          <li class="space-y-2 px-4 py-2 group cursor-pointer">
             <div class="flex items-center gap-4 flex-wrap">
-              <a href={`posts/` + id} title={data.title}>
-                <span
-                  title={data.title}
-                  class="text-accent flex-1 text-xl font-semibold text-ellipsis overflow-hidden whitespace-nowrap decoration-dashed underline-offset-4 hover:underline"
-                >
-                  {data.title}
-                </span>
+              <a
+                href={`posts/` + id}
+                title={data.title}
+                class="text-primary flex-1 text-xl font-semibold truncate decoration-dashed underline-offset-4 hover:underline"
+              >
+                {data.title}
               </a>
-              <span class="h-5 text-sm opacity-70 ml-auto">
+              <span class="max-w-25 truncate text-sm opacity-70 ml-auto">
                 {dayjs(data.pubDateTime).format('YYYY-MM-DD')}
               </span>
             </div>
-            <span class="text-base">
-              {data.description || 'no description'}
-            </span>
+            <span class="text-sm" title={data.description}>{data.description || 'no description'}</span>
           </li>
         ))
       }

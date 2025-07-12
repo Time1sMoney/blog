@@ -21,9 +21,9 @@ const next =
 ---
 
 <MainLayout>
-  <div class="py-4 space-y-4 w-full">
+  <div class="py-4 space-y-4 w-full px-4">
     <div class="space-y-4">
-      <div class="text-3xl font-semibold text-accent">
+      <div class="text-3xl font-semibold text-primary">
         {title}
       </div>
       <div class="flex gap-2 items-center">
@@ -95,14 +95,14 @@ const next =
 
     // Create the progress bar div
     const progressBar = document.createElement('div');
-    progressBar.className = 'progress-bar h-1 w-0 bg-accent';
+    progressBar.className = 'progress-bar h-1 w-0 bg-primary';
     progressBar.id = 'myBar';
 
     // Append the progress bar to the progress container
     progressContainer.appendChild(progressBar);
 
     // Append the progress container to the document body or any other desired parent element
-    document.body.appendChild(progressContainer);
+    document.body.parentElement.appendChild(progressContainer);
   }
   createProgressBar();
 

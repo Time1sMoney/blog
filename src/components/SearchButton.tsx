@@ -25,10 +25,10 @@ const SearchButton = ({ posts }: Props) => {
   return (
     <div
       id="search-input"
-      className="border-border flex w-80 cursor-pointer items-center justify-between rounded-full border-2 bg-transparent px-2 py-1 hover:outline max-md:mx-auto"
+      className="border-border flex w-1/2 cursor-pointer items-center justify-between rounded-full border-2 bg-transparent px-2 py-1 hover:border-primary max-md:mx-auto"
       onClick={openModal}
     >
-      <Icon icon="tabler:search" fontSize={18} className="text-black" />
+      <Icon icon="tabler:search" fontSize={18} className="text-black dark:text-white" />
       <span className="border-border rounded border-2 px-2 text-sm">
         /
       </span>

@@ -21,6 +21,12 @@ export default defineConfig({
       wrap: true
     }
   },
+  image: {
+    domains: ['astro:build','picsum.photos'],
+    remotePatterns: [{
+      protocol: 'https',
+    }]
+  },
   // Enable React to support React JSX components.
   integrations: [
     react(),

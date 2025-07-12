@@ -16,19 +16,14 @@ const { pageTitle = "Alonia's Blog" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Time1sMoney's blog" />
+    <meta name="description" content="Alonia's blog" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{pageTitle}</title>
     <ClientRouter fallback="animate" />
   </head>
-  <body
-    class="relative font-sans min-w-[500px] min-h-[100vh] flex flex-col"
-  >
+  <body class="relative min-h-[100vh] flex flex-col max-w-4xl mx-auto">
     <Header />
-    <main
-      class="max-w-4xl container mx-auto relative flex flex-1"
-      transition:animate="fade"
-    >
+    <main class="relative flex-1" transition:animate="fade">
       <slot />
     </main>
     <Footer />

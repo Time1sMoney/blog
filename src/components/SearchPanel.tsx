@@ -73,7 +73,7 @@ const SearchPanel = ({ posts, closeModal }: Props) => {
             type="text"
             autoFocus
             autoComplete="off"
-            className="w-full border-none bg-transparent outline-none focus:outline-none dark:text-accent"
+            className="w-full border-none bg-transparent outline-none focus:outline-none dark:text-primary"
             value={input}
             onChange={handleInput}
             placeholder="Search for..."
@@ -93,7 +93,7 @@ const SearchPanel = ({ posts, closeModal }: Props) => {
                 href={`/blog/${item.id}`}
                 onClick={handleLinkClick}
               >
-                <div className="hover:border-accent cursor-pointer items-center rounded border-2 p-2">
+                <div className="hover:border-primary cursor-pointer items-center rounded border-2 p-2">
                   <div className="flex items-center gap-2">
                     <Icon icon="tabler:article" fontSize={20} />
                     <div

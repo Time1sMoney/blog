@@ -44,30 +44,30 @@ const NavMenu: React.FC<Props> = ({ pathname }) => {
       <button
         title="menu"
         aria-label="Menu"
-        className={`hover:text-primary cursor-pointer hover:scale-110 max-md:absolute max-md:right-20 max-md:block md:hidden dark:text-slate-300`}
+        className={`hover:text-primary cursor-pointer hover:scale-110 md:hidden dark:text-slate-300`}
         onClick={openMenu}
       >
         <Icon icon="tabler:menu-2" fontSize={20} />
       </button>
       <div
         ref={maskRef}
-        className={`absolute left-0 right-0 top-0 z-[990] mt-[64px] h-full w-full opacity-40 transition-all duration-300 ease-in-out max-md:bg-black ${
+        className={`absolute left-0 right-0 top-0 z-[990] mt-[64px] h-full w-full opacity-40 transition-all duration-300 ease-in-out max-sm:bg-black ${
           show ? 'animate-in fade-in block' : 'animate-out fade-out hidden'
         }`}
       ></div>
       <nav
         ref={menuContainerRef}
-        className={`flex gap-8 max-md:absolute max-md:right-0 max-md:top-0 max-md:z-[999] max-md:mt-[64px] max-md:flex max-md:h-full max-md:flex-col max-md:gap-2 max-md:overflow-hidden max-md:bg-slate-800 max-md:text-white max-md:duration-500 ${
-          show ? 'max-md:w-1/2' : 'max-md:w-0'
+        className={`max-sm:bg-background flex gap-8 max-sm:absolute max-sm:right-0 max-sm:top-0 max-sm:z-[999] max-sm:mt-[64px] max-sm:flex max-sm:h-full max-sm:flex-col max-sm:gap-2 max-sm:overflow-hidden max-sm:rounded-bl-md max-sm:duration-500 ${
+          show ? 'max-sm:w-1/2' : 'max-sm:w-0'
         }`}
       >
         {menu.map((item) => (
           <a
             key={item.url}
             href={item.url}
-            className={`hover:text-foreground max-md:flex max-md:justify-center max-md:p-4 max-md:hover:bg-slate-300 max-md:focus:bg-slate-300 ${
+            className={`hover:text-foreground max-sm:not-last:border-b max-sm:border-border max-sm:flex max-sm:justify-center max-sm:p-4 max-sm:focus:bg-gray-100 ${
               pathname.includes(item.url)
-                ? 'decoration-primary underline decoration-wavy underline-offset-4 max-md:bg-slate-300 max-md:decoration-transparent'
+                ? 'decoration-primary text-primary font-extrabold underline decoration-wavy underline-offset-4 max-sm:decoration-transparent'
                 : ''
             }`}
             onClick={handleClick}
