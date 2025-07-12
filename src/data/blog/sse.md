@@ -1,8 +1,9 @@
 ---
 title: 有时候,或许我们不需要Web Socket
-author: Codercoin
+author: Alonia
 pubDateTime: 2023-09-07
 tags: ['SSE', 'WebSocket']
+description:  Sometimes, maybe we don't need WebSocket
 ---
 
 > 有时候，或许我们不需要 Web Socket
@@ -59,6 +60,6 @@ export default App;
 
 ## 效果
 
-![image-20230901111330436](https://github.com/codercoin98/frontend-notebook/assets/55039022/76953407-531e-43ef-81ab-27b18438ac81)
+![1](/src/assets/images/sse_1.png)
 
-![sse](https://github.com/codercoin98/frontend-notebook/assets/55039022/4177328c-e19d-4e11-9145-46658a108edd)
+![2](/src/assets/images/sse_2.gif)

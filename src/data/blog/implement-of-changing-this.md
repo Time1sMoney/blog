@@ -1,6 +1,6 @@
 ---
 title: Implement of changing this
-author: Codercoin
+author: Alonia
 pubDateTime: 2023-09-13
 tags: ['Javascript']
 description: One of Common interview questions

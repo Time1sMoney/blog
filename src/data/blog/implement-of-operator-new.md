@@ -1,6 +1,6 @@
 ---
 title: Implement of operator new
-author: Codercoin
+author: Alonia
 pubDateTime: 2023-09-13
 tags: ['Javascript']
 description: One of Common interview questions , we need understand the operator new how to work.

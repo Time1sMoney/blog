@@ -1,6 +1,6 @@
 ---
 title: 使用发布订阅模式解耦Axios处理逻辑
-author: Codercoin
+author: Alonia
 pubDateTime: 2024-10-03
 tags: ['Axios', 'Design Pattern']
 description: 通过发布订阅模式替代传统的Axios拦截器逻辑处理，实现模块的功能解耦和可维护性提升
