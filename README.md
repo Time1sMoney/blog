@@ -1,4 +1,4 @@
-# Codercoin' Book
+# Just a blog
 
 This is my tech blog, inspired by [Astro Paper](https://github.com/satnaing/astro-paper).
 
